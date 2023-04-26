@@ -1,6 +1,5 @@
 import './css/styles.css';
 import Notiflix from 'notiflix';
-const axios = require('axios');
 import ImagesApiService from './js/api';
 
 const input = document.querySelector('input');
@@ -16,10 +15,12 @@ function onSubmit(e) {
   e.preventDefault();
   clearMarkup();
   imagesApiService.query = e.currentTarget.elements.searchQuery.value;
+  imagesApiService.resetPage();
   imagesApiService.fetchImages().then(result => {
-    loadMoreBtn.classList.remove('load-more');
+    
     if (result.total === 0) {
       clearMarkup();
+      loadMoreBtn.classList.add('load-more');
       return Notiflix.Notify.info(
         'Sorry, there are no images matching your search query. Please try again.'
       );
@@ -54,6 +55,7 @@ function createGallery(data) {
 }
 function appendGalleryMarkup(data) {
   gallery.insertAdjacentHTML('beforeend', createGallery(data));
+  loadMoreBtn.classList.remove('load-more');
 }
 function clearMarkup() {
   gallery.innerHTML = '';

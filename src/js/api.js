@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Notiflix from 'notiflix';
+const loadMoreBtn = document.querySelector('.load-more');
 export default class ImagesApiService {
   constructor() {
     this.q = '';
@@ -18,6 +19,7 @@ export default class ImagesApiService {
     const url = `https://pixabay.com/api/`;
     if (this.query === '' || this.query === ' ') {
       Notiflix.Notify.info('Please fill out the field');
+      loadMoreBtn.classList.add('load-more');
     } else {
       const data = await axios.get(`${url}?${options}&page=${this.page}`);
       const response = await data.data;
@@ -27,6 +29,9 @@ export default class ImagesApiService {
   }
   incrementPage() {
     this.page += 1;
+  }
+  resetPage(){
+    this.page = 1;
   }
   get query() {
     return this.q;
