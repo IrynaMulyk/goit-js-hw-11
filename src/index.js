@@ -11,13 +11,13 @@ const imagesApiService = new ImagesApiService();
 form.addEventListener('submit', onSubmit);
 loadMoreBtn.addEventListener('click', onLoadMore);
 
-function onSubmit(e) {
+async function onSubmit(e) {
   e.preventDefault();
   clearMarkup();
   imagesApiService.query = e.currentTarget.elements.searchQuery.value;
   imagesApiService.resetPage();
-  imagesApiService.fetchImages().then(result => {
-    
+  try {
+    const result = await imagesApiService.fetchImages();
     if (result.total === 0) {
       clearMarkup();
       loadMoreBtn.classList.add('load-more');
@@ -25,8 +25,11 @@ function onSubmit(e) {
         'Sorry, there are no images matching your search query. Please try again.'
       );
     }
+
     appendGalleryMarkup(result);
-  });
+  } catch (error) {
+    return error;
+  }
 }
 
 function createGallery(data) {

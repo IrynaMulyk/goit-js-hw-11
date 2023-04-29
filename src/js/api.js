@@ -21,10 +21,15 @@ export default class ImagesApiService {
       Notiflix.Notify.info('Please fill out the field');
       loadMoreBtn.classList.add('load-more');
     } else {
-      const data = await axios.get(`${url}?${options}&page=${this.page}`);
+      try{
+        const data = await axios.get(`${url}?${options}&page=${this.page}`);
       const response = await data.data;
       this.incrementPage();
       return response;
+      }
+    catch(error){
+      Notiflix.Notify.info(`Bad request: ${error}`);
+    }
     }
   }
   incrementPage() {

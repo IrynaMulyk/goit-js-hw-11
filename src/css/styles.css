@@ -18,9 +18,31 @@ body {
   max-width: 320px;
   margin-bottom: 16px;
 }
-.load-more {
+.load-more{
   visibility: hidden;
+
 }
+button {
+  font-size: 14px;
+  background-color: #999999;
+  color: #ffffff;
+  padding: 12px 8px;
+  border-radius: 8px;
+  transition: all 800ms;
+  border: 0px;
+margin-top: 5px;
+
+}
+button:hover{
+  box-shadow: 5px 5px 5px #999999;
+}
+form button{
+  padding: 15px 24px;
+  background-color: #3c54dd;
+  color: #ffffff;
+  font-size: 18px;
+}
+
 .gallery {
   display: flex;
   max-width: 1140px;
@@ -75,4 +97,13 @@ p {
 }
 span {
   font-weight: 400;
+}
+
+
+
+input{
+  font-size: 18px;
+  padding: 12px 8px;
+  border-radius: 8px;
+  margin-right: 10px;
 }
