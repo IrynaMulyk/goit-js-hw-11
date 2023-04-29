@@ -27,6 +27,9 @@ async function onSubmit(e) {
     }
 
     appendGalleryMarkup(result);
+    Notiflix.Notify.info(
+      `Hooray! We found ${result.totalHits} images.`
+    );
   } catch (error) {
     return error;
   }
